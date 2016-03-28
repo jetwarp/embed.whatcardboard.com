@@ -1,0 +1,16 @@
+CACHE MANIFEST
+# 2016-03-21T00:17:26.630Z
+
+CACHE:
+.
+index.html
+index.js
+layout.css
+style.css
+../headsets.json
+https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css
+https://fonts.googleapis.com/css?family=Roboto:400,700
+
+# allow remote resources, like the font asset files
+NETWORK:
+*

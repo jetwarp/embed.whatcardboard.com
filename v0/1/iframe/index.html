@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html manifest="manifest.appcache">
+  <head>
+    <title>whatcardboard.com iframe</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+    <link rel="stylesheet" href="layout.css">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div id="selector" class='buttonlist'>
+      <h1>Select your viewer</h1>
+      <button class="headset" data-qr-url="goo.gl/R2gCV1">
+        <h2>Google Cardboard V2</h2>
+      </button>
+      <button class="headset" data-qr-url="g.co/cardboard">
+        <h2>Google Cardboard V1</h2>
+      </button>
+      <button class="headset" data-qr-url="goo.gl/pdNRON">
+        <h2>View-Master VR</h2>
+      </button>
+      <button class="headset" data-qr-url="goo.gl/KtBrnE">
+        <h2>Homido Mini</h2>
+      </button>
+      <button class="headset" data-qr-url="goo.gl/UWAaPF">
+        <h2>Powis ViewR</h2>
+      </button>
+      <button class="headset" data-qr-url="goo.gl/rbM2ur">
+        <h2>DSCVR</h2>
+      </button>
+      <button class="headset" data-qr-url="goo.gl/vvTUK3">
+        <h2>Zeiss VR ONE</h2>
+      </button>
+      <button id="browse">
+        <h2>Browse all known headsets</h2>
+      </button>
+    </div>
+    <div id="more" class="mixed-case buttonlist">
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.0/es6-shim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/0.11.0/fetch.min.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>whatcardboard.com iframe demo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css">
+  </head>
+  <body>
+    <h1 id="heading">Headset unknown</h1>
+    <pre id="json"></pre>
+    <button id="select">Select headset</button>
+    <iframe id="config" src="https://embed.whatcardboard.com/v0/1/iframe/" hidden></iframe>
+    <script>
+    var selectButton = document.getElementById('select');
+    var heading = document.getElementById('heading');
+    var jsonOutput = document.getElementById('json');
+    var wcIframe = document.getElementById('config');
+    function updateDevice(message) {
+      // if the user has selected a headset
+      if (message.profile) {
+        heading.textContent = 'Info on your headset';
+        jsonOutput.textContent = JSON.stringify(message.profile);
+        wcIframe.hidden = true;
+      // If the user doesn't appear to have a headset configured
+      } else {
+        heading.textContent = 'Headset unknown';
+        // Prompt them to configure
+        wcIframe.hidden = false;
+      }
+    }
+    function toggleSelector() {
+      if (wcIframe.hidden) {
+        wcIframe.hidden = false;
+      } else {
+        wcIframe.hidden = true;
+        wcIframe.contentWindow.postMessage({type: 'restart'},
+          'https://embed.whatcardboard.com');
+      }
+    }
+    selectButton.addEventListener('click', toggleSelector);
+    function handleWhatCardboardMessage(message) {
+      switch (message.type) {
+        case 'deviceprofile': return updateDevice(message);
+      }
+    }
+    window.addEventListener('message', function handleMessage(evt) {
+      if (evt.origin == 'https://embed.whatcardboard.com') {
+        return handleWhatCardboardMessage(evt.data);
+      }
+    });
+    </script>
+  </body>
+</html>
