@@ -9,7 +9,8 @@ layout.css
 style.css
 ../headsets.json
 https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css
-https://fonts.googleapis.com/css?family=Roboto:400,700
+https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.0/es6-shim.min.js
+https://cdnjs.cloudflare.com/ajax/libs/fetch/0.11.0/fetch.min.js
 
 # allow remote resources, like the font asset files
 NETWORK:
