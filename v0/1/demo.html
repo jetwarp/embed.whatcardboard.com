@@ -18,7 +18,7 @@
       // if the user has selected a headset
       if (message.profile) {
         heading.textContent = 'Info on your headset';
-        jsonOutput.textContent = JSON.stringify(message.profile);
+        jsonOutput.textContent = JSON.stringify(message.profile, null, 2);
         wcIframe.hidden = true;
       // If the user doesn't appear to have a headset configured
       } else {
