@@ -68,7 +68,7 @@ headsetPromise.then(function() {
 });
 
 function deviceButtonClickListener(evt) {
-  return selectDevice(evt.target.dataset.qrUrl);
+  return selectDevice(evt.currentTarget.dataset.qrUrl);
 }
 
 var selectorView = document.getElementById("selector");
