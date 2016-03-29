@@ -92,6 +92,7 @@ document.body.appendChild(browseButton);
 
 function startPresentation() {
   listContainer.hidden = true;
+  window.scrollTo(0, 0);
   sendParentMessage({
     type: 'ready',
     presentable: true
