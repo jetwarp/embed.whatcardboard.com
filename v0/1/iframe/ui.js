@@ -15,8 +15,13 @@ function deviceButtonClickListener(evt) {
 }
 
 function nameForHeadset(headset) {
+  // If the headset profile has a name hint
+  if (headset.hint) {
+    // use it
+    return headset.hint;
+
   // If the headset has both a model and vendor name defined
-  if (headset.vendor && headset.model) {
+  } else if (headset.vendor && headset.model) {
 
     // If the model name begins with the vendor name
     if (headset.model.slice(0, headset.vendor.length) == headset.vendor) {
@@ -31,8 +36,8 @@ function nameForHeadset(headset) {
 
   // If the headset has an empty vendor, model, or both
   } else {
-    // use the only-present model, vendor, or hint field
-    return headset.model || headset.vendor || headset.hint;
+    // use the only-present model (or vendor) field
+    return headset.model || headset.vendor;
   }
 }
 
