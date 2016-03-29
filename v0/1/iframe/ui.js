@@ -82,13 +82,13 @@ for (var i = 0; i < showcaseHeadsets.length; i++) {
     headsetUrlMap.get(showcasedHeadset.qrUrl)), headsetHeading);
 }
 
-document.appendChild(showcaseContainer);
+document.body.appendChild(showcaseContainer);
 
 var browseButton = document.createElement('button');
 browseButton.textContent = 'Browse all known headsets';
 browseButton.addEventListener('click', showHeadsetList);
 
-document.appendChild(browseButton);
+document.body.appendChild(browseButton);
 
 function startPresentation() {
   listContainer.hidden = true;
