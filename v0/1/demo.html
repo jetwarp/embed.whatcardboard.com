@@ -14,6 +14,19 @@
     var heading = document.getElementById('heading');
     var jsonOutput = document.getElementById('json');
     var wcIframe = document.getElementById('config');
+    var readyCallback = null;
+    function presentWhenAble(message) {
+      if (message.presentable) {
+        wcIframe.hidden = false;
+        readyCallback = null;
+      }
+    }
+    function presentSelector() {
+      wcIframe.contentWindow.postMessage(
+        {type: 'present'},
+        'https://embed.whatcardboard.com');
+      readyCallback = presentWhenAble;
+    }
     function updateDevice(message) {
       // if the user has selected a headset
       if (message.profile) {
@@ -24,22 +37,21 @@
       } else {
         heading.textContent = 'Headset unknown';
         // Prompt them to configure
-        wcIframe.hidden = false;
+        presentSelector();
       }
     }
     function toggleSelector() {
       if (wcIframe.hidden) {
-        wcIframe.hidden = false;
+        presentSelector();
       } else {
         wcIframe.hidden = true;
-        wcIframe.contentWindow.postMessage({type: 'restart'},
-          'https://embed.whatcardboard.com');
       }
     }
     selectButton.addEventListener('click', toggleSelector);
     function handleWhatCardboardMessage(message) {
       switch (message.type) {
         case 'deviceprofile': return updateDevice(message);
+        case 'ready': return readyCallback && readyCallback(message);
       }
     }
     window.addEventListener('message', function handleMessage(evt) {

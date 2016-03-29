@@ -27,9 +27,20 @@ or 'stored' (when the iframe inits and has an existing record, or is queried).
 
 stored: false if localStorage gave an error, true otherwise.
 
-profile: An object mostly conforming to the CadrboardDevice Protocol Buffer
+profile: An object mostly conforming to the CardboardDevice Protocol Buffer
 definition's DeviceProfile message schema (see "Device profile structure" below
 for details). If no viewer has been selected by the user, this will be `null`.
+
+### type: 'bounce'
+
+This is the message type that the iframe will send in response to any
+messages of an unrecognized type.
+
+reason: this will be the string "unrecognized".
+
+original: This will contain the message being bounced. You may choose to
+include uniquely identifying fields on messages you send if you wish to
+recognize a specific bounce response.
 
 ### type: 'close'
 
