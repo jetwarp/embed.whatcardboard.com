@@ -48,10 +48,28 @@
       }
     }
     selectButton.addEventListener('click', toggleSelector);
+    function reloadIframe() {
+
+      /*
+        Known issue: this will cause the deviceprofile to be sent again,
+        potentially re-hiding / displaying the selector UI after being
+        manually opened / closed.
+
+        We could handle this (setting the open/close state to only apply
+        automatically the first time we receive a deviceprofile message), but
+        considering that this is just a demo, it's not worth the added
+        complexity.
+      */
+
+      wcIframe.contentWindow.postMessage(
+        {type: 'reload'},
+        'https://embed.whatcardboard.com');
+    }
     function handleWhatCardboardMessage(message) {
       switch (message.type) {
         case 'deviceprofile': return updateDevice(message);
         case 'ready': return readyCallback && readyCallback(message);
+        case 'updateready': return reloadIframe();
       }
     }
     window.addEventListener('message', function handleMessage(evt) {
