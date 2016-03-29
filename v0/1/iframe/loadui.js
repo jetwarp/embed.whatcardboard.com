@@ -1,7 +1,7 @@
 /* global headsetPromise */
 (function(){
 var stylesheets = [
-  "https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css",
+  "https://cdnjs.cloudflare.com/ajax/libs/normalize/4.0.0/normalize.min.css",
   "https://fonts.googleapis.com/css?family=Roboto:400,700",
   "layout.css",
   "style.css",
