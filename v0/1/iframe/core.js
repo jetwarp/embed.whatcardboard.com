@@ -77,12 +77,21 @@ function presentUserInterface() {
   }
 }
 
+function bounceUnrecognizedMessage(original) {
+  return sendParentMessage({
+    type: 'bounce',
+    reason: 'unrecognized',
+    original: original
+  });
+}
+
 function receiveMessage(evt) {
   var message = evt.data;
   switch (message.type) {
     case 'query': return querySelectedHeadset();
     case 'present': return presentUserInterface();
     case 'reload': return location.reload();
+    default: return bounceUnrecognizedMessage(message);
   }
 }
 
