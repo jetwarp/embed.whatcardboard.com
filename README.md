@@ -20,10 +20,10 @@ the iframe element visible in your page.
 
 ## Messages sent by the iframe
 
-### type: 'deviceprofile'
+### type: "deviceprofile"
 
-source: either 'selected' (for when the user has just selected their headset),
-or 'stored' (when the iframe inits and has an existing record, or is queried).
+source: either "selected" (for when the user has just selected their headset),
+or "stored" (when the iframe is loaded, or is queried with a "query" message).
 
 stored: false if localStorage gave an error, true otherwise.
 
@@ -31,7 +31,20 @@ profile: An object mostly conforming to the CardboardDevice Protocol Buffer
 definition's DeviceProfile message schema (see "Device profile structure" below
 for details). If no viewer has been selected by the user, this will be `null`.
 
-### type: 'bounce'
+### type: "ready"
+
+This message is sent, with a `presentable` property of `true`, after the iframe
+has finished loading its headset selection UI in response to a `present`
+message sent by the embedding context (see documentation of "present" messages
+below).
+
+### type: "updateready"
+
+This message will be sent when the application cache has downloaded a newer
+version if the iframe, which will be applied if the embedding context sends a
+"reload" message (see documentation of "reload" messages below).
+
+### type: "bounce"
 
 This is the message type that the iframe will send in response to any
 messages of an unrecognized type.
@@ -42,24 +55,33 @@ original: This will contain the message being bounced. You may choose to
 include uniquely identifying fields on messages you send if you wish to
 recognize a specific bounce response.
 
-### type: 'close'
+### type: "close"
 
 User has clicked the close / cancel button within the iframe. (Currently, no
 such element exists, so this will never be sent.)
 
 ## Messages accepted by the iframe
 
-### type: 'restart'
+### type: "present"
 
-Use for when the iframe is getting displayed after having been previously
-closed, to discard the user's previous state (displayed tab/mode, scroll
-position, etc).
+Tells the iframe to load UI elements for the user to select their headset. Once
+all the UI elements have been loaded, the iframe will respond with a `"ready"`
+message with `presentable: true` (see documentation of "ready" messages above).
 
-### type: 'query'
+This message can be sent as many times as necessary by the embedding context:
+every subsequent message will reset the interface to its initial state, as if
+the UI had been freshly loaded.
+
+### type: "query"
 
 Ask the iframe to re-send its stored device profile. Can be useful for when a
 page is getting focus after the selected viewer has been changed via another
 tab.
+
+### type: "reload"
+
+Reloads the iframe content, applying any cached updates (see documentation of
+"updateready" messages above).
 
 ## Device profile structure
 
