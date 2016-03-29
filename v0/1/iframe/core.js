@@ -95,7 +95,11 @@ function receiveMessage(evt) {
   }
 }
 
-window.addEventListener("message", receiveMessage);
+window.addEventListener('message', receiveMessage);
+
+applicationCache.addEventListener('updateready', function() {
+  return sendParentMessage({type: 'updateready'});
+});
 
 headsetPromise.then(function() {
   // if the user hasn't selected another headset before the load finished
