@@ -79,7 +79,7 @@ for (var i = 0; i < showcaseHeadsets.length; i++) {
   var headsetHeading = document.createElement('h2');
   headsetHeading.textContent = showcasedHeadset.name;
   showcaseContainer.appendChild(createHeadsetButton(
-    headsetUrlMap.get(showcasedHeadset.qrUrl)), headsetHeading);
+    headsetUrlMap.get(showcasedHeadset.qrUrl), headsetHeading));
 }
 
 document.body.appendChild(showcaseContainer);
