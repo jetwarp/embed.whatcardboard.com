@@ -11,7 +11,7 @@ var showcaseHeadsets = [
 ];
 
 function deviceButtonClickListener(evt) {
-  return selectDevice(evt.currentTarget.dataset.qrUrl);
+  return selectDevice(headsetUrlMap.get(evt.currentTarget.dataset.qrUrl));
 }
 
 function nameForHeadset(headset) {

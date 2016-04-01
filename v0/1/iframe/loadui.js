@@ -1,5 +1,18 @@
-/* global headsetPromise */
+/* global fetch */
+var headsets;
+var headsetUrlMap = new Map();
 (function(){
+var headsetPromise = fetch('../headsets.json').then(function(response) {
+	return response.json();
+}).then(function(headsetArray) {
+	headsets = headsetArray;
+	for (var i = 0; i < headsets.length; i++) {
+	  var headset = headsets[i];
+	  headsetUrlMap.set(headset.original_url, headset);
+	}
+	return headsets;
+});
+
 var stylesheets = [
   "https://cdnjs.cloudflare.com/ajax/libs/normalize/4.0.0/normalize.min.css",
   "https://fonts.googleapis.com/css?family=Roboto:400,700",
