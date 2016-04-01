@@ -1,15 +1,5 @@
 /* global selectDevice headsets headsetUrlMap sendParentMessage uiHooks */
 
-var showcaseHeadsets = [
-  {name: "Google Cardboard V2", qrUrl: "goo.gl/R2gCV1"},
-  {name: "Google Cardboard V1", qrUrl: "g.co/cardboard"},
-  {name: "View-Master VR", qrUrl: "goo.gl/pdNRON"},
-  {name: "Homido Mini", qrUrl: "goo.gl/KtBrnE"},
-  {name: "Powis ViewR", qrUrl: "goo.gl/UWAaPF"},
-  {name: "DSCVR", qrUrl: "goo.gl/rbM2ur"},
-  {name: "Zeiss VR ONE", qrUrl: "goo.gl/vvTUK3"}
-];
-
 function deviceButtonClickListener(evt) {
   return selectDevice(headsetUrlMap.get(evt.currentTarget.dataset.qrUrl));
 }
@@ -75,19 +65,6 @@ function showHeadsetList() {
 var pageHeading = document.createElement('h1');
 pageHeading.textContent = 'Select your viewer';
 document.body.appendChild(pageHeading);
-
-var showcaseContainer = document.createElement('div');
-showcaseContainer.className = 'buttonlist';
-
-for (var i = 0; i < showcaseHeadsets.length; i++) {
-  var showcasedHeadset = showcaseHeadsets[i];
-  var headsetHeading = document.createElement('h2');
-  headsetHeading.textContent = showcasedHeadset.name;
-  showcaseContainer.appendChild(createHeadsetButton(
-    headsetUrlMap.get(showcasedHeadset.qrUrl), headsetHeading));
-}
-
-document.body.appendChild(showcaseContainer);
 
 var browseButton = document.createElement('button');
 browseButton.textContent = 'Browse all known headsets';
