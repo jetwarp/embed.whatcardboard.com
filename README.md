@@ -23,7 +23,7 @@ the iframe element visible in your page.
 ### type: "deviceprofile"
 
 source: either "selected" (for when the user has just selected their headset),
-or "stored" (when the iframe is loaded, or is queried with a "query" message).
+or "stored" (when the iframe is queried with a "query" message).
 
 stored: false if localStorage gave an error, true otherwise.
 

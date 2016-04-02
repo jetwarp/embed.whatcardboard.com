@@ -78,5 +78,3 @@ window.addEventListener('message', receiveMessage);
 applicationCache.addEventListener('updateready', function() {
   return sendParentMessage({type: 'updateready'});
 });
-
-querySelectedHeadset();
