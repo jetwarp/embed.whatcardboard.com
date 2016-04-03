@@ -48,6 +48,8 @@ function handleQRImage(blobUrl) {
   });
 }
 
+var qrContainer = modes.qr;
+
 var fileInput = document.createElement('input');
 fileInput.id = 'qr-file-input';
 fileInput.className = 'proxied';
@@ -69,7 +71,6 @@ var thumbnailImage = document.createElement('image');
 
 var statusParagraph = document.createElement('p');
 
-var qrContainer = modes.qr;
 
 fileInput.addEventListener('change', function(){
   var blobURL = URL.createObjectURL(fileInput.files[0]);
