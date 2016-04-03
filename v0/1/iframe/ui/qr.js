@@ -24,10 +24,11 @@ var loadCardboardLib = onDemandLoader([
 ]);
 
 function getProfileFromShortUrl(url) {
-  Promise.all([loadCardboardLib(), getLongUrl(url)]).then(function(results) {
-    // will return null if this doesn't look like a profile
-    return CARDBOARD.uriToParams(results[1]);
-  });
+  return Promise.all([loadCardboardLib(), getLongUrl(url)])
+    .then(function(results) {
+      // will return null if this doesn't look like a profile
+      return CARDBOARD.uriToParams(results[1]);
+    });
 }
 
 // TODO: have error / return types that go by an enum-like construction
