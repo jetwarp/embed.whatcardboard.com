@@ -60,7 +60,7 @@ fileInput.accept = 'image/*';
 fileInput.setAttribute('capture', 'camera');
 
 var proxyLabel = document.createElement('label');
-proxyLabel.for = fileInput.id;
+proxyLabel.htmlFor = fileInput.id;
 proxyLabel.className = 'button';
 proxyLabel.textContent = 'Take photo of QR code';
 
@@ -70,7 +70,6 @@ qrContainer.appendChild(proxyLabel);
 var thumbnailImage = document.createElement('image');
 
 var statusParagraph = document.createElement('p');
-
 
 fileInput.addEventListener('change', function(){
   var blobURL = URL.createObjectURL(fileInput.files[0]);
