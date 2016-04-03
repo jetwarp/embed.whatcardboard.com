@@ -64,7 +64,7 @@ searchBar.addEventListener('input', function() {
   if (searchBar.value) {
   var resultSet = new Set(searchIndex.search(searchBar.value)
     .map(function(ob){
-      return ob.ref.original_url;
+      return ob.ref;
     }));
     for (var i = 0; i < headsets.length; i++) {
       buttonsByHeadsetIndex[i].hidden =
