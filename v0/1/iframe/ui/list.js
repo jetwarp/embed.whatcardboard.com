@@ -1,4 +1,4 @@
-/* global selectDevice headsets headsetUrlMap sendParentMessage uiHooks */
+/* global selectDevice headsets headsetUrlMap modes lunr */
 
 function deviceButtonClickListener(evt) {
   return selectDevice(headsetUrlMap.get(evt.currentTarget.dataset.qrUrl));
@@ -45,41 +45,41 @@ function createHeadsetButton(headset, content) {
   return headsetButton;
 }
 
-var listContainer = document.createElement('div');
-listContainer.className = 'mixed-case buttonlist';
+var listContainer = modes.list;
+listContainer.classList.add('mixed-case');
 
-function listAllHeadsets() {
-  for (var i = 0; i < headsets.length; i++) {
-    listContainer.appendChild(createHeadsetButton(headsets[i]));
+var searchIndex = new lunr.Index;
+searchIndex.pipeline.add(lunr.trimmer);
+searchIndex.field('model');
+searchIndex.field('vendor');
+searchIndex.field('hint');
+searchIndex.ref('original_url');
+
+var buttonsByHeadsetIndex = [];
+
+var searchBar = document.createElement('input');
+searchBar.type = 'search';
+searchBar.placeholder = 'Search';
+searchBar.addEventListener('input', function() {
+  if (searchBar.value) {
+  var resultSet = new Set(searchIndex.search(searchBar.value)
+    .map(function(ob){
+      return ob.ref.original_url;
+    }));
+    for (var i = 0; i < headsets.length; i++) {
+      buttonsByHeadsetIndex[i].hidden =
+        !resultSet.has(headsets[i].original_url);
+    }
+  } else {
+    for (var i = 0; i < headsets.length; i++) {
+      buttonsByHeadsetIndex[i].hidden = false;
+    }
   }
-  document.body.appendChild(listContainer);
+});
+
+for (var i = 0; i < headsets.length; i++) {
+  searchIndex.add(headsets[i]);
+  var headsetButton = createHeadsetButton(headsets[i]);
+  buttonsByHeadsetIndex[i] = headsetButton;
+  listContainer.appendChild(headsetButton);
 }
-
-function showHeadsetList() {
-  if (listContainer.children.length == 0) {
-    listAllHeadsets();
-  }
-  listContainer.hidden = false;
-}
-
-var pageHeading = document.createElement('h1');
-pageHeading.textContent = 'Select your viewer';
-document.body.appendChild(pageHeading);
-
-var browseButton = document.createElement('button');
-browseButton.textContent = 'Browse all known headsets';
-browseButton.addEventListener('click', showHeadsetList);
-
-document.body.appendChild(browseButton);
-
-function startPresentation() {
-  listContainer.hidden = true;
-  window.scrollTo(0, 0);
-  sendParentMessage({
-    type: 'ready',
-    presentable: true
-  });
-}
-
-uiHooks.present = startPresentation;
-startPresentation();

@@ -31,7 +31,7 @@ for (var i = 0; i < stylesheets.length; i++){
 // we'll just directly add ui.js to the document (once the headsets are loaded)
 headsetPromise.then(function(){
 var uiscr = document.createElement('script');
-uiscr.src = 'ui.js';
+uiscr.src = 'ui/main.js';
 document.head.appendChild(uiscr);
 });
 })();

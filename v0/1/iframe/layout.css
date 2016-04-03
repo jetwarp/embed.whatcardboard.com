@@ -1,7 +1,7 @@
 [hidden] {
   display: none !important;
 }
-.buttonlist {
+.flexcol {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -9,4 +9,26 @@
   -webkit-flex-flow: column;
       -ms-flex-flow: column;
           flex-flow: column;
+}
+button, .button {
+  margin: 2px;
+  padding: 4px 6px;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: center;
+}
+.proxied {
+  /* hide without breaking tab focus:
+     see http://tympanus.net/codrops/2015/09/15/styling-customizing-file-inputs-smart-way/
+  */
+	overflow: hidden;
+	position: absolute;
+	top: 0; left: 0; right: 100%; bottom: 100%;
+  opacity: 0;
+	z-index: -1;
+}
+.proxied:focus + label {
+	outline: 1px dotted #000;
+	outline: -webkit-focus-ring-color auto 5px;
 }
