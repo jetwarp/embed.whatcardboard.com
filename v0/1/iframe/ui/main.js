@@ -9,6 +9,7 @@ function addScripts(scriptURLs) {
       }
       scriptEl.async = false;
       scriptEl.src = scriptURLs[i];
+      document.head.appendChild(scriptEl);
     }
   });
 }
