@@ -62,6 +62,9 @@ proxyLabel.for = fileInput.id;
 proxyLabel.className = 'button';
 proxyLabel.textContent = 'Take photo of QR code';
 
+qrContainer.appendChild(fileInput);
+qrContainer.appendChild(proxyLabel);
+
 var thumbnailImage = document.createElement('image');
 
 var statusParagraph = document.createElement('p');
