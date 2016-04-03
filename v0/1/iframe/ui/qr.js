@@ -24,7 +24,7 @@ var loadCardboardLib = onDemandLoader([
 ]);
 
 function getProfileFromShortUrl(url) {
-  return Promise.all([loadCardboardLib(), getLongUrl(url)])
+  return Promise.all([loadCardboardLib(), getLongUrl('http://' + url)])
     .then(function(results) {
       // will return null if this doesn't look like a profile
       return CARDBOARD.uriToParams(results[1]);
