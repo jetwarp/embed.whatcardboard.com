@@ -2858,7 +2858,7 @@ GridSampler.sampleGridx = function(image, dimension,
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-
+/* global Canvas Image */
 "use strict";
 
 var Decoder = require('./decoder');
@@ -2880,11 +2880,11 @@ qrcode.sizeOfDataLengthInfo = [
 ];
 
 qrcode.decode = function(src) {
-  var Promise = qrcode.Promise || Promise;
-  var Canvas = qrcode.Canvas || Canvas;
-  var Image = qrcode.Image || Image;
+  qrcode.Promise = qrcode.Promise || Promise;
+  qrcode.Canvas = qrcode.Canvas || Canvas;
+  qrcode.Image = qrcode.Image || Image;
 
-  return new Promise(function(resolve) {
+  return new qrcode.Promise(function(resolve) {
     if (src == null) {
       var canvas_qr = document.getElementById("qr-canvas");
       var context = canvas_qr.getContext('2d');
@@ -2899,10 +2899,10 @@ qrcode.decode = function(src) {
       if (typeof src !== "string") {
         throw new Error("Must provide image source as a URI");
       }
-      var image = new Image();
+      var image = new qrcode.Image();
       image.onload = function() {
         //var canvas_qr = document.getElementById("qr-canvas");
-        var canvas_qr = document.createElement('canvas');
+        var canvas_qr = new qrcode.Canvas();
         var context = canvas_qr.getContext('2d');
         var nheight = image.height;
         var nwidth = image.width;
