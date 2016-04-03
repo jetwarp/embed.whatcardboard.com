@@ -67,7 +67,7 @@ proxyLabel.textContent = 'Take photo of QR code';
 qrContainer.appendChild(fileInput);
 qrContainer.appendChild(proxyLabel);
 
-var thumbnailImage = document.createElement('image');
+var thumbnailImage = document.createElement('img');
 
 var statusParagraph = document.createElement('p');
 
