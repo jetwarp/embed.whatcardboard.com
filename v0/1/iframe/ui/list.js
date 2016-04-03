@@ -76,6 +76,7 @@ searchBar.addEventListener('input', function() {
     }
   }
 });
+listContainer.appendChild(searchBar);
 
 for (var i = 0; i < headsets.length; i++) {
   searchIndex.add(headsets[i]);
