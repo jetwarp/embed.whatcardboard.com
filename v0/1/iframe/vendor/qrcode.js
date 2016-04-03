@@ -2881,7 +2881,9 @@ qrcode.sizeOfDataLengthInfo = [
 
 qrcode.decode = function(src) {
   qrcode.Promise = qrcode.Promise || Promise;
-  qrcode.Canvas = qrcode.Canvas || Canvas;
+  qrcode.Canvas = qrcode.Canvas || function() {
+    return document.createElement('canvas');
+  };
   qrcode.Image = qrcode.Image || Image;
 
   return new qrcode.Promise(function(resolve) {
